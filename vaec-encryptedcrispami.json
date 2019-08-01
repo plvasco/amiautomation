@@ -5,8 +5,7 @@
 	 "subnet_id":"subnet-7209ae04",
 	      
          "type":"amazon-ebs",
-         "access_key":"blank",
-         "secret_key":"blank",
+         "iam_instance_profile": "fillmein"
          "region":"us-gov-west-1",
          "instance_type":"t3.medium",
          "source_ami":"ami-6f3e780e",
