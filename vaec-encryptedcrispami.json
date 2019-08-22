@@ -2,15 +2,14 @@
    "builders":[
       {  
          "vpc_id":"vpc-2825304d",
-	 "subnet_id":"subnet-7209ae04",
+	 "subnet_id":"subnet-c0e54aa4",
 	      
          "type":"amazon-ebs",
-         "access_key":"blank",
-         "secret_key":"blank",
+	      "iam_instance_profile":"vaec-packer-ami-role",
          "region":"us-gov-west-1",
          "instance_type":"t3.medium",
-         "source_ami":"ami-6f3e780e",
-         "ami_name":"vaec-windows2016-core-base-20190731-encrypted",
+         "source_ami":"ami-55295234",
+         "ami_name":"vaec-windows2016-base-{{isotime \"2006-01-02\"}}",
          "user_data_file":"ec2-userdata.ps1",
          "communicator":"winrm",
          "winrm_username":"Administrator",
@@ -20,7 +19,7 @@
 	       "Status": "Info"
 	 },
          "encrypt_boot":true,
-         "kms_key_id":"blank"
+         "kms_key_id":"77c26cf5-1104-46f0-81bb-c9b3be399195"
       }
    ],
    "provisioners":[
@@ -48,7 +47,14 @@
       },
      {
 	 "type":"powershell",
+	 "script":"version.ps1"
+      },
+     {
+	 "type":"powershell",
 	 "script":"Import-Certificate.ps1"
+      },
+      {
+      "type":"windows-update"
       },
 
       {
